@@ -28,5 +28,9 @@ public class Macro implements Serializable {
         macro.put(System.currentTimeMillis() - lastWriteTime, new List[]{buttonArray, axisArray});
         lastWriteTime = System.currentTimeMillis();
     }
+    
+    public Map<Long, List[]> getData(){
+        return macro;
+    }
 
 }
