@@ -1,8 +1,17 @@
 package org.usfirst.frc.team2212.robot;
 
+import static com.oracle.jrockit.jfr.ContentType.Address;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import macro.Macro;
 import org.usfirst.frc.team2212.robot.commands.driving.Forward;
 import org.usfirst.frc.team2212.robot.commands.driving.Sideways;
 import org.usfirst.frc.team2212.robot.commands.driving.Turn;
+import org.usfirst.frc.team2212.robot.commands.macro.Record;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -11,9 +20,29 @@ import org.usfirst.frc.team2212.robot.commands.driving.Turn;
 public class OI extends JoystickMap {
 
     public OI() {
-        FORWARD_BUTTON.whileHeld(new Forward());
-        SIDEWAYS_BUTTON.whileHeld(new Sideways());
-        TURN_BUTTON.whileHeld(new Turn());
+//        FileInputStream fin = null;
+//        try {
+//            fin = new FileInputStream("~/Macros/test.ser");
+//            ObjectInputStream ois = new ObjectInputStream(fin);
+//            Macro macro = (Macro) ois.readObject();
+//            ois.close();
+            FORWARD_BUTTON.whileHeld(new Forward());
+            SIDEWAYS_BUTTON.whileHeld(new Sideways());
+            TURN_BUTTON.whileHeld(new Turn());
+            RECORD_BUTTON.whenPressed(new Record("test"));
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(OI.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (IOException ex) {
+//            Logger.getLogger(OI.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(OI.class.getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//            try {
+//                fin.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(OI.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
     }
 
     public double getDriverY() {

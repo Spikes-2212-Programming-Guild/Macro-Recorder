@@ -27,5 +27,7 @@ public class JoystickMap {
 	protected Button FORWARD_BUTTON = new JoystickButton(driverJoystick, 1);
 	protected Button SIDEWAYS_BUTTON = new JoystickButton(driverJoystick, 2);
 	protected Button TURN_BUTTON = new JoystickButton(driverJoystick, 3);
+        
+        protected Button RECORD_BUTTON = new JoystickButton(driverJoystick, 12);
 
 }
