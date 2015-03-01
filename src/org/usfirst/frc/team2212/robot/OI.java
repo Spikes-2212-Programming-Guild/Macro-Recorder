@@ -36,5 +36,9 @@ public class OI extends JoystickMap {
 	public double getNavX() {
 		return navJoystick.getX();
 	}
+        
+        public boolean getDriverButton(int button){
+            return driverJoystick.getRawButton(button);
+        }
 
 }
