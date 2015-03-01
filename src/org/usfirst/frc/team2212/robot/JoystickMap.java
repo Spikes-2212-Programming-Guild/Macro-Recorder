@@ -8,6 +8,7 @@ package org.usfirst.frc.team2212.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import macro.MacroJoystick;
 
 /**
  *
@@ -15,8 +16,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class JoystickMap {
 
-	protected Joystick driverJoystick = new Joystick(0);
-	protected Joystick navJoystick = new Joystick(1);
+	protected MacroJoystick driverJoystick = new MacroJoystick(0);
+	protected MacroJoystick navJoystick = new MacroJoystick(1);
 
 	protected Button UP_BUTTON = new JoystickButton(navJoystick, 3);
 	protected Button DOWN_BUTTON = new JoystickButton(navJoystick, 2);
