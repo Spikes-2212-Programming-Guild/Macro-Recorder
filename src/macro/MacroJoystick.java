@@ -52,18 +52,23 @@ public class MacroJoystick extends Joystick {
         }
         return super.getX();
     }
-    
+
     public double getOverrideableY() {
         if (overriding) {
             return y;
         }
         return super.getY();
     }
+
     public double getOverrideableTwist() {
         if (overriding) {
             return twist;
         }
         return super.getTwist();
+    }
+
+    public void setOverride(boolean override) {
+        this.overriding = override;
     }
 
 }
