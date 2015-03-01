@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.usfirst.frc.team2212.robot.triggers;
+package macro;
 
 import edu.wpi.first.wpilibj.Joystick;
 
