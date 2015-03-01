@@ -6,9 +6,10 @@
 package org.usfirst.frc.team2212.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,10 +62,28 @@ public class Record extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+        FileOutputStream fout = null;
+        try {
+            fout = new FileOutputStream("~/Macros/" + macroName + ".ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fout);
+            oos.writeObject(macro);
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Record.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Record.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fout.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Record.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        end();
     }
 }
