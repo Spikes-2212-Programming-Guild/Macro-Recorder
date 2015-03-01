@@ -9,8 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import macro.Macro;
 import static org.usfirst.frc.team2212.robot.Robot.oi;
 
 /**
@@ -19,36 +21,37 @@ import static org.usfirst.frc.team2212.robot.Robot.oi;
  */
 public class Record extends Command {
 
-    int iteration;
-    FileWriter fileWriter;
+    String macroName;
+    Macro macro;
 
     public Record(String macroName) {
-        try {
-            fileWriter = new FileWriter(macroName + ".log");
-        } catch (IOException ex) {
-            Logger.getLogger(Record.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        this.macroName = macroName;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        // setTimeout(15);
+        ArrayList<Boolean> buttonsArray = new ArrayList<>();
+        ArrayList<Double> axisArray = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            buttonsArray.add(i, oi.getDriverButton(i));
+        }
+        axisArray.add(0, oi.getDriverX());
+        axisArray.add(1, oi.getDriverY());
+        axisArray.add(2, oi.getDriverTwist());
+        macro = new Macro(buttonsArray, axisArray);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        try {
-            fileWriter.write("iteration : " + iteration);
-            for (int i = 1; i <= 12; i++) {
-                fileWriter.write("driver button " + i + " : " + oi.getDriverButton(i));
-            }
-            fileWriter.write("driver x : " + oi.getDriverX());
-            fileWriter.write("driver y : " + oi.getDriverY());
-            iteration++;
-        } catch (IOException ex) {
-            Logger.getLogger(Record.class.getName()).log(Level.SEVERE, null, ex);
+        ArrayList<Boolean> buttonsArray = new ArrayList<>();
+        ArrayList<Double> axisArray = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            buttonsArray.add(i, oi.getDriverButton(i));
         }
+        axisArray.add(0, oi.getDriverX());
+        axisArray.add(1, oi.getDriverY());
+        axisArray.add(2, oi.getDriverTwist());
+        macro.addData(buttonsArray, axisArray);
     }
 
     // Make this return true when this Command no longer needs to run execute()
