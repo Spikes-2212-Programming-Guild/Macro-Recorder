@@ -15,18 +15,18 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class JoystickMap {
 
-	protected MacroJoystick driverJoystick = new MacroJoystick(0);
+	public MacroJoystick driverJoystick = new MacroJoystick(0);
 	protected MacroJoystick navJoystick = new MacroJoystick(1);
 
-	protected Button UP_BUTTON = new JoystickButton(navJoystick, 3);
-	protected Button DOWN_BUTTON = new JoystickButton(navJoystick, 2);
-	protected Button OPEN_BUTTON = new JoystickButton(navJoystick, 5);
-	protected Button CLOSE_BUTTON = new JoystickButton(navJoystick, 4);
-	protected Button MOVE_BUTTON = new JoystickButton(driverJoystick, 1);
+	// protected Button UP_BUTTON = new JoystickButton(navJoystick, 3);
+	// protected Button DOWN_BUTTON = new JoystickButton(navJoystick, 2);
+	// protected Button OPEN_BUTTON = new JoystickButton(navJoystick, 5);
+	// protected Button CLOSE_BUTTON = new JoystickButton(navJoystick, 4);
+	protected Button MOVE_BUTTON = new JoystickButton(driverJoystick, 2);
 
-	protected Button FORWARD_BUTTON = new JoystickButton(driverJoystick, 1);
-	protected Button SIDEWAYS_BUTTON = new JoystickButton(driverJoystick, 2);
-	protected Button TURN_BUTTON = new JoystickButton(driverJoystick, 3);
+	// protected Button FORWARD_BUTTON = new JoystickButton(driverJoystick, 1);
+	// protected Button SIDEWAYS_BUTTON = new JoystickButton(driverJoystick, 2);
+	// protected Button TURN_BUTTON = new JoystickButton(driverJoystick, 3);
 
 	protected Button RECORD_BUTTON = new JoystickButton(driverJoystick, 12);
 

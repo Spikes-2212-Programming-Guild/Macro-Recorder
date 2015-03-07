@@ -34,11 +34,11 @@ public class OI extends JoystickMap {
 	}
 
 	public double getDriverY() {
-		return driverJoystick.getY();
+		return driverJoystick.getOverrideableY();
 	}
 
 	public double getDriverX() {
-		return driverJoystick.getX();
+		return driverJoystick.getOverrideableX();
 	}
 
 	public double getDriverTwist() {
