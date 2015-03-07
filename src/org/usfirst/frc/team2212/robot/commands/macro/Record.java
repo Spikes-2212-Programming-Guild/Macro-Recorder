@@ -7,16 +7,16 @@ package org.usfirst.frc.team2212.robot.commands.macro;
 
 import static org.usfirst.frc.team2212.robot.Robot.oi;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import macro.Macro;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -34,24 +34,30 @@ public class Record extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		ArrayList<Boolean> buttonsArray = new ArrayList<>(13);
+		ArrayList<Boolean> buttonsArray = new ArrayList<>();
+		buttonsArray.add(false);
 		ArrayList<Double> axisArray = new ArrayList<>(3);
 		for (int i = 1; i <= 12; i++) {
-			buttonsArray.add(i, oi.getDriverButton(i));
+			buttonsArray.add(oi.getDriverButton(i));
 		}
 		axisArray.add(0, oi.getDriverX());
 		axisArray.add(1, oi.getDriverY());
 		axisArray.add(2, oi.getDriverTwist());
 		macro = new Macro(buttonsArray, axisArray);
+		SmartDashboard.putBoolean("in end", false);
+		SmartDashboard.putBoolean("in try", false);
+		SmartDashboard.putBoolean("in fon", false);
+		SmartDashboard.putBoolean("in io", false);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		ArrayList<Boolean> buttonsArray = new ArrayList<>();
+		buttonsArray.add(false);
 		ArrayList<Double> axisArray = new ArrayList<>();
 		for (int i = 1; i <= 12; i++) {
-			buttonsArray.add(i, oi.getDriverButton(i));
+			buttonsArray.add(oi.getDriverButton(i));
 		}
 		axisArray.add(0, oi.getDriverX());
 		axisArray.add(1, oi.getDriverY());
@@ -68,26 +74,30 @@ public class Record extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		FileOutputStream fout = null;
+		ObjectOutputStream output = null;
+		SmartDashboard.putBoolean("in end", true);
 		try {
-			fout = new FileOutputStream("/home/admin/Macros/" + macroName
-					+ ".ser");
-			ObjectOutputStream oos = new ObjectOutputStream(fout);
-			oos.writeObject(macro);
-			oos.close();
-		} catch (FileNotFoundException ex) {
-			Logger.getLogger(Record.class.getName())
-					.log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
-			Logger.getLogger(Record.class.getName())
-					.log(Level.SEVERE, null, ex);
+			File file = new File("/home/lvuser/Macros/" + macroName + ".ser");
+			Runtime.getRuntime().exec(
+					"touch /home/lvuser/Macros/" + macroName + ".ser");
+			SmartDashboard.putBoolean("in try", true);
+			SmartDashboard.putBoolean("file exists", file.exists());
+			FileOutputStream fos = new FileOutputStream(file);
+			output = new ObjectOutputStream(fos);
+			output.writeObject(macro);
+		} catch (FileNotFoundException e) {
+			SmartDashboard.putBoolean("in fon", true);
+			e.printStackTrace();
+		} catch (IOException e) {
+			SmartDashboard.putBoolean("in io", true);
+			e.printStackTrace();
 		} finally {
-			try {
-				fout.close();
-			} catch (IOException ex) {
-				Logger.getLogger(Record.class.getName()).log(Level.SEVERE,
-						null, ex);
-			}
+			if (output != null)
+				try {
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		}
 	}
 
