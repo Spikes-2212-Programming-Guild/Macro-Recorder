@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2212.robot;
 
 import org.usfirst.frc.team2212.robot.commands.Move;
+import org.usfirst.frc.team2212.robot.commands.macro.Play;
 import org.usfirst.frc.team2212.robot.commands.macro.Record;
 
 /**
@@ -10,26 +11,8 @@ import org.usfirst.frc.team2212.robot.commands.macro.Record;
 public class OI extends JoystickMap {
 
 	public OI() {
-		// FileInputStream fin = null;
-		// try {
-		// fin = new FileInputStream("~/Macros/test.ser");
-		// ObjectInputStream ois = new ObjectInputStream(fin);
-		// Macro macro = (Macro) ois.readObject();
-		// ois.close();
+		PLAY_BUTTON.whenPressed(new Play("test"));
 		RECORD_BUTTON.whileHeld(new Record("test"));
-		// } catch (FileNotFoundException ex) {
-		// Logger.getLogger(OI.class.getName()).log(Level.SEVERE, null, ex);
-		// } catch (IOException ex) {
-		// Logger.getLogger(OI.class.getName()).log(Level.SEVERE, null, ex);
-		// } catch (ClassNotFoundException ex) {
-		// Logger.getLogger(OI.class.getName()).log(Level.SEVERE, null, ex);
-		// } finally {
-		// try {
-		// fin.close();
-		// } catch (IOException ex) {
-		// Logger.getLogger(OI.class.getName()).log(Level.SEVERE, null, ex);
-		// }
-		// }
 		MOVE_BUTTON.whileHeld(new Move());
 	}
 

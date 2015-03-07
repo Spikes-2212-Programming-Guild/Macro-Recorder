@@ -29,5 +29,6 @@ public class JoystickMap {
 	// protected Button TURN_BUTTON = new JoystickButton(driverJoystick, 3);
 
 	protected Button RECORD_BUTTON = new JoystickButton(driverJoystick, 12);
+	protected Button PLAY_BUTTON = new JoystickButton(driverJoystick, 11);
 
 }

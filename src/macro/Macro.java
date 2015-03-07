@@ -7,9 +7,7 @@ package macro;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -17,27 +15,38 @@ import java.util.Map;
  */
 public class Macro implements Serializable {
 
-    LinkedHashMap <Long, List[]> macro;
-    private long lastWriteTime;
+	ArrayList<Pair<Long, List[]>> macro;
+	private long lastWriteTime;
 
-    /**
-     *
-     * @param buttonArray - 12 long array of booleans
-     * @param axisArray - 3 long array of doubles, ranging from -1 to 1 in this order: X axis, Y axis, Twist
-     */
-    public Macro(ArrayList buttonArray, ArrayList axisArray) {
-        macro = new LinkedHashMap<>();
-        macro.put(Long.valueOf(0), new List[]{buttonArray, axisArray});
-        lastWriteTime = System.currentTimeMillis();
-    }
+	/**
+	 *
+	 * @param buttonArray
+	 *            - 12 long array of booleans
+	 * @param axisArray
+	 *            - 3 long array of doubles, ranging from -1 to 1 in this order:
+	 *            X axis, Y axis, Twist
+	 */
+	public Macro(ArrayList buttonArray, ArrayList axisArray) {
+		macro = new ArrayList();
+		macro.add(new Pair<Long, List[]>((long) 0, new List[] { buttonArray,
+				axisArray }));
+		lastWriteTime = System.currentTimeMillis();
+	}
 
-    public void addData(ArrayList buttonArray, ArrayList axisArray) {
-        macro.put(System.currentTimeMillis() - lastWriteTime, new List[]{buttonArray, axisArray});
-        lastWriteTime = System.currentTimeMillis();
-    }
-    
-    public Map<Long, List[]> getData(){
-        return macro;
-    }
+	public void addData(ArrayList buttonArray, ArrayList axisArray) {
+		macro.add(new Pair<Long, List[]>(System.currentTimeMillis()
+				- lastWriteTime, new List[] { buttonArray, axisArray }));
+		lastWriteTime = System.currentTimeMillis();
+	}
+
+	public List<Pair<Long, List[]>> getData() {
+		return macro;
+	}
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
+	}
 
 }

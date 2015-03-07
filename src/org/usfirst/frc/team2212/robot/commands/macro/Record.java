@@ -48,6 +48,7 @@ public class Record extends Command {
 		SmartDashboard.putBoolean("in try", false);
 		SmartDashboard.putBoolean("in fon", false);
 		SmartDashboard.putBoolean("in io", false);
+		SmartDashboard.putData(this);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -78,13 +79,18 @@ public class Record extends Command {
 		SmartDashboard.putBoolean("in end", true);
 		try {
 			File file = new File("/home/lvuser/Macros/" + macroName + ".ser");
+			if (file.exists())
+				Runtime.getRuntime().exec(
+						"rm /home/lvuser/Macros/" + macroName + ".ser");
 			Runtime.getRuntime().exec(
 					"touch /home/lvuser/Macros/" + macroName + ".ser");
-			SmartDashboard.putBoolean("in try", true);
+			Runtime.getRuntime().exec(
+					"chmod 666 /home/lvuser/Macros/" + macroName + ".ser");
 			SmartDashboard.putBoolean("file exists", file.exists());
 			FileOutputStream fos = new FileOutputStream(file);
 			output = new ObjectOutputStream(fos);
 			output.writeObject(macro);
+			SmartDashboard.putBoolean("in try", true);
 		} catch (FileNotFoundException e) {
 			SmartDashboard.putBoolean("in fon", true);
 			e.printStackTrace();

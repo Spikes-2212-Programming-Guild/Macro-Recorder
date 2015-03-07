@@ -5,7 +5,6 @@ import org.usfirst.frc.team2212.robot.subsystems.OneEngine;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -84,13 +83,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		SmartDashboard.putBoolean("Overriding: ",
-				oi.driverJoystick.getOverride());
-		SmartDashboard.putNumber("Driver Y:", oi.getDriverY());
-		for (int i = 1; i <= 12; i++) {
-			SmartDashboard.putBoolean("Driver Button " + i + ":",
-					oi.getDriverButton(i));
-		}
+		// SmartDashboard.putBoolean("Overriding: ",
+		// oi.driverJoystick.getOverride());
+		// SmartDashboard.putNumber("Driver Y:", oi.getDriverY());
+		// for (int i = 1; i <= 12; i++) {
+		// SmartDashboard.putBoolean("Driver Button " + i + ":",
+		// oi.getDriverButton(i));
+		// }
 		Scheduler.getInstance().run();
 	}
 
