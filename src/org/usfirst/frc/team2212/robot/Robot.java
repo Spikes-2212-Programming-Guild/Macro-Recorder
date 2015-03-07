@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2212.robot;
 
+import org.usfirst.frc.team2212.robot.subsystems.OneEngine;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -25,6 +27,7 @@ public class Robot extends IterativeRobot {
 	// RobotMap.FRONT_ENCODER_1_PORT, RobotMap.FRONT_ENCODER_2_PORT,
 	// RobotMap.REAR_ENCODER_1_PORT, RobotMap.REAR_ENCODER_2_PORT,
 	// RobotMap.WHEEL_DIAMETER);
+	public static OneEngine engine = new OneEngine(0);
 	public static OI oi = new OI();
 
 	/**
