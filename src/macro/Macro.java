@@ -7,6 +7,7 @@ package macro;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,10 +17,16 @@ import java.util.Map;
  */
 public class Macro implements Serializable {
 
-    Map<Long, List[]> macro;
+    LinkedHashMap <Long, List[]> macro;
     private long lastWriteTime;
 
+    /**
+     *
+     * @param buttonArray - 12 long array of booleans
+     * @param axisArray - 3 long array of doubles, ranging from -1 to 1 in this order: X axis, Y axis, Twist
+     */
     public Macro(ArrayList buttonArray, ArrayList axisArray) {
+        macro = new LinkedHashMap<>();
         macro.put(Long.valueOf(0), new List[]{buttonArray, axisArray});
         lastWriteTime = System.currentTimeMillis();
     }
