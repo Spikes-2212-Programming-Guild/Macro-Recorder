@@ -34,8 +34,8 @@ public class Record extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		ArrayList<Boolean> buttonsArray = new ArrayList<>();
-		ArrayList<Double> axisArray = new ArrayList<>();
+		ArrayList<Boolean> buttonsArray = new ArrayList<>(13);
+		ArrayList<Double> axisArray = new ArrayList<>(3);
 		for (int i = 1; i <= 12; i++) {
 			buttonsArray.add(i, oi.getDriverButton(i));
 		}
