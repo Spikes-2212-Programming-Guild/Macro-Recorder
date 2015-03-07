@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2212.robot;
 
-import org.usfirst.frc.team2212.robot.subsystems.DriveTrain;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -15,18 +13,18 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveTrain driveTrain = new DriveTrain(
-			RobotMap.LEFT_FORWARD_VICTOR_PORT,
-			RobotMap.LEFT_BACKWARDS_VICTOR_PORT,
-			RobotMap.RIGHT_FORWARD_VICTOR_PORT,
-			RobotMap.RIGHT_BACKWARDS_VICTOR_PORT,
-			RobotMap.MIDDLE_FRONT_VICTOR_PORT,
-			RobotMap.MIDDLE_BACKWARDS_VICTOR_PORT,
-			RobotMap.LEFT_ENCODER_1_PORT, RobotMap.LEFT_ENCODER_2_PORT,
-			RobotMap.RIGHT_ENCODER_1_PORT, RobotMap.RIGHT_ENCODER_2_PORT,
-			RobotMap.FRONT_ENCODER_1_PORT, RobotMap.FRONT_ENCODER_2_PORT,
-			RobotMap.REAR_ENCODER_1_PORT, RobotMap.REAR_ENCODER_2_PORT,
-			RobotMap.WHEEL_DIAMETER);
+	// public static final DriveTrain driveTrain = new DriveTrain(
+	// RobotMap.LEFT_FORWARD_VICTOR_PORT,
+	// RobotMap.LEFT_BACKWARDS_VICTOR_PORT,
+	// RobotMap.RIGHT_FORWARD_VICTOR_PORT,
+	// RobotMap.RIGHT_BACKWARDS_VICTOR_PORT,
+	// RobotMap.MIDDLE_FRONT_VICTOR_PORT,
+	// RobotMap.MIDDLE_BACKWARDS_VICTOR_PORT,
+	// RobotMap.LEFT_ENCODER_1_PORT, RobotMap.LEFT_ENCODER_2_PORT,
+	// RobotMap.RIGHT_ENCODER_1_PORT, RobotMap.RIGHT_ENCODER_2_PORT,
+	// RobotMap.FRONT_ENCODER_1_PORT, RobotMap.FRONT_ENCODER_2_PORT,
+	// RobotMap.REAR_ENCODER_1_PORT, RobotMap.REAR_ENCODER_2_PORT,
+	// RobotMap.WHEEL_DIAMETER);
 	public static OI oi = new OI();
 
 	/**
@@ -39,7 +37,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		// instantiate the command used for the autonomous period
-		driveTrain.reset();
+		// driveTrain.reset();
 	}
 
 	@Override
@@ -74,7 +72,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		driveTrain.reset();
+		// driveTrain.reset();
 	}
 
 	/**
