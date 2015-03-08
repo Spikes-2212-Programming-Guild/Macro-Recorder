@@ -31,7 +31,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Play extends Command {
 
 	private Macro macro;
-	Iterator<Pair<Long, List[]>> it;
+	Iterator<Pair<Long, List[]>> drit;
+	Iterator<Pair<Long, List[]>> navit;
 	Pair<Long, List[]> pair;
 	String macroName;
 
@@ -70,7 +71,8 @@ public class Play extends Command {
 			SmartDashboard.putBoolean("macro is null", true);
 		} else {
 			SmartDashboard.putBoolean("macro is null", false);
-			it = macro.getData().iterator();
+			drit = macro.getDataDriving().iterator();
+			navit= macro.getDataNavigating().iterator();
 			oi.setOverride(true);
 			SmartDashboard.putData(this);
 		}
@@ -79,8 +81,8 @@ public class Play extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		if (it.hasNext()) {
-			pair = it.next();
+		if (drit.hasNext()) {
+			pair = drit.next();
 			// try {
 			// Thread.sleep(pair.getFirstValue());
 			// } catch (InterruptedException ex) {
@@ -90,18 +92,26 @@ public class Play extends Command {
 			oi.setDriverX((double) pair.getSecondValue()[1].get(0));
 			oi.setDriverY((double) pair.getSecondValue()[1].get(1));
 			oi.setDriverTwist((double) pair.getSecondValue()[1].get(2));
-			for (int i = 1; i < 11; i++) {
+			for (int i = 1; i <= 10; i++) {
 
 				oi.setDriverButton(i, (boolean) pair.getSecondValue()[0].get(i));
 			}
-			it.remove(); // avoids a ConcurrentModificationException
+			oi.setNavigatorX((double) pair.getSecondValue()[1].get(0));
+			oi.setNavigatorY((double) pair.getSecondValue()[1].get(1));
+			oi.setNavigatorTwist((double) pair.getSecondValue()[1].get(2));
+			for (int i = 1; i <= 10; i++) {
+
+				oi.setNavigatorButton(i, (boolean) pair.getSecondValue()[0].get(i));
+			}
+			drit.remove(); // avoids a ConcurrentModificationException
+			navit.remove(); // avoids a ConcurrentModificationException
 		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return !it.hasNext();
+		return !drit.hasNext();
 	}
 
 	// Called once after isFinished returns true

@@ -28,6 +28,7 @@ public class Robot extends IterativeRobot {
 	// RobotMap.REAR_ENCODER_1_PORT, RobotMap.REAR_ENCODER_2_PORT,
 	// RobotMap.WHEEL_DIAMETER);
 	public static OneEngine engine = new OneEngine(9);
+	public static OneEngine e = new OneEngine(8);
 	// public static Subsystem lock = new Subsystem() {
 	//
 	// @Override

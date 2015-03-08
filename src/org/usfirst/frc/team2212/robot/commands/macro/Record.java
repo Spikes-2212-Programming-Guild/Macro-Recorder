@@ -36,16 +36,26 @@ public class Record extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		ArrayList<Boolean> buttonsArray = new ArrayList<>();
-		buttonsArray.add(false);
-		ArrayList<Double> axisArray = new ArrayList<>(3);
+		ArrayList<Boolean> drivingButtonsArray = new ArrayList<>();
+		drivingButtonsArray.add(false);
+		ArrayList<Double> drivingAxisArray = new ArrayList<>(3);
 		for (int i = 1; i <= 10; i++) {
-			buttonsArray.add(oi.getDriverButton(i));
+			drivingButtonsArray.add(oi.getDriverButton(i));
 		}
-		axisArray.add(0, oi.getDriverX());
-		axisArray.add(1, oi.getDriverY());
-		axisArray.add(2, oi.getDriverTwist());
-		macro = new Macro(buttonsArray, axisArray);
+		drivingAxisArray.add(0, oi.getDriverX());
+		drivingAxisArray.add(1, oi.getDriverY());
+		drivingAxisArray.add(2, oi.getDriverTwist());
+		
+		ArrayList<Boolean> navigatingButtonsArray = new ArrayList<>();
+		drivingButtonsArray.add(false);
+		ArrayList<Double> navigatingAxisArray = new ArrayList<>(3);
+		for (int i = 1; i <= 10; i++) {
+			navigatingButtonsArray.add(oi.getDriverButton(i));
+		}
+		navigatingAxisArray.add(0, oi.getDriverX());
+		navigatingAxisArray.add(1, oi.getDriverY());
+		navigatingAxisArray.add(2, oi.getDriverTwist());
+		macro = new Macro(drivingButtonsArray, drivingAxisArray, navigatingButtonsArray, navigatingAxisArray );
 		SmartDashboard.putBoolean("in end", false);
 		SmartDashboard.putBoolean("in try", false);
 		SmartDashboard.putBoolean("in fon", false);
@@ -59,13 +69,25 @@ public class Record extends Command {
 		ArrayList<Boolean> buttonsArray = new ArrayList<>();
 		buttonsArray.add(false);
 		ArrayList<Double> axisArray = new ArrayList<>();
-		for (int i = 1; i <= 12; i++) {
+		for (int i = 1; i <= 10; i++) {
 			buttonsArray.add(oi.getDriverButton(i));
 		}
 		axisArray.add(0, oi.getDriverX());
 		axisArray.add(1, oi.getDriverY());
 		axisArray.add(2, oi.getDriverTwist());
-		macro.addData(buttonsArray, axisArray);
+		macro.addDataDriving(buttonsArray, axisArray);
+		
+
+		ArrayList<Boolean> navigatingButtonsArray = new ArrayList<>();
+		navigatingButtonsArray.add(false);
+		ArrayList<Double> navigatingAxisArray = new ArrayList<>();
+		for (int i = 1; i <= 10; i++) {
+			navigatingButtonsArray.add(oi.getDriverButton(i));
+		}
+		navigatingAxisArray.add(0, oi.getNavX());
+		navigatingAxisArray.add(1, oi.getNavY());
+		navigatingAxisArray.add(2, oi.getNavTwist());
+		macro.addDataDriving(navigatingButtonsArray, navigatingAxisArray);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

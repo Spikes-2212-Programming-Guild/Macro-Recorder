@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2212.robot.commands;
 
 import static org.usfirst.frc.team2212.robot.Robot.engine;
+import static org.usfirst.frc.team2212.robot.Robot.e;
 import static org.usfirst.frc.team2212.robot.Robot.oi;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -24,6 +25,7 @@ public class Move extends Command {
 	@Override
 	protected void execute() {
 		engine.set(oi.getDriverY());
+		e.set(oi.getNavX());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
