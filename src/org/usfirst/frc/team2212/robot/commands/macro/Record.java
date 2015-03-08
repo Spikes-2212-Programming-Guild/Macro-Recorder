@@ -47,14 +47,14 @@ public class Record extends Command {
 		drivingAxisArray.add(2, oi.getDriverTwist());
 		
 		ArrayList<Boolean> navigatingButtonsArray = new ArrayList<>();
-		drivingButtonsArray.add(false);
-		ArrayList<Double> navigatingAxisArray = new ArrayList<>(3);
-		for (int i = 1; i <= 10; i++) {
+		navigatingButtonsArray.add(false);
+		ArrayList<Double> navigatingAxisArray = new ArrayList<>();
+		for (int i = 1; i <= 12; i++) {
 			navigatingButtonsArray.add(oi.getDriverButton(i));
 		}
-		navigatingAxisArray.add(0, oi.getDriverX());
-		navigatingAxisArray.add(1, oi.getDriverY());
-		navigatingAxisArray.add(2, oi.getDriverTwist());
+		navigatingAxisArray.add(oi.getDriverX());
+		navigatingAxisArray.add(oi.getDriverY());
+		navigatingAxisArray.add(oi.getDriverTwist());
 		macro = new Macro(drivingButtonsArray, drivingAxisArray, navigatingButtonsArray, navigatingAxisArray );
 		SmartDashboard.putBoolean("in end", false);
 		SmartDashboard.putBoolean("in try", false);
@@ -81,13 +81,14 @@ public class Record extends Command {
 		ArrayList<Boolean> navigatingButtonsArray = new ArrayList<>();
 		navigatingButtonsArray.add(false);
 		ArrayList<Double> navigatingAxisArray = new ArrayList<>();
-		for (int i = 1; i <= 10; i++) {
-			navigatingButtonsArray.add(oi.getDriverButton(i));
+		for (int i = 1; i <= 12; i++) {
+			navigatingButtonsArray.add(oi.getNavigatorButton(i));
 		}
+		SmartDashboard.putNumber("size: ", navigatingButtonsArray.size());
 		navigatingAxisArray.add(0, oi.getNavX());
 		navigatingAxisArray.add(1, oi.getNavY());
 		navigatingAxisArray.add(2, oi.getNavTwist());
-		macro.addDataDriving(navigatingButtonsArray, navigatingAxisArray);
+		macro.addDataNavigating(navigatingButtonsArray, navigatingAxisArray);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

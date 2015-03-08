@@ -1,17 +1,21 @@
 package org.usfirst.frc.team2212.robot.commands;
 
-import static org.usfirst.frc.team2212.robot.Robot.engine;
-import static org.usfirst.frc.team2212.robot.Robot.e;
+import static org.usfirst.frc.team2212.robot.Robot.twoEngine;
 import static org.usfirst.frc.team2212.robot.Robot.oi;
+
+import org.usfirst.frc.team2212.robot.subsystems.TwoEngine;
+
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class Move extends Command {
-
+	
+	
 	public Move() {
-		requires(engine);
+		requires(twoEngine);
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
@@ -24,8 +28,7 @@ public class Move extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		engine.set(oi.getDriverY());
-		e.set(oi.getNavX());
+		twoEngine.set(oi.getDriverY(), oi.getNavY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -37,13 +40,13 @@ public class Move extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		engine.set(0);
+		twoEngine.set(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		engine.set(0);
+		twoEngine.set(0, 0);
 	}
 }

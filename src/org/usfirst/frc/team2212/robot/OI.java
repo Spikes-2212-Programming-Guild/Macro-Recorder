@@ -13,7 +13,6 @@ public class OI extends JoystickMap {
 	public OI() {
 		PLAY_BUTTON.whenPressed(new Play("test2"));
 		RECORD_BUTTON.whileHeld(new Record("test2"));
-		MOVE_BUTTON.whileHeld(new Move());
 	}
 
 	public double getDriverY() {
@@ -80,5 +79,9 @@ public class OI extends JoystickMap {
 
 	public void setNavigatorTwist(double value) {
 		navJoystick.setTwist(value);
+	}
+
+	public boolean getNavigatorButton(int i) {
+		return navJoystick.getRawButton(i);
 	}
 }

@@ -33,7 +33,9 @@ public class Play extends Command {
 	private Macro macro;
 	Iterator<Pair<Long, List[]>> drit;
 	Iterator<Pair<Long, List[]>> navit;
-	Pair<Long, List[]> pair;
+	Pair<Long, List[]> drpair;
+	Pair<Long, List[]> navpair;
+	
 	String macroName;
 
 	public Play(String macroName) {
@@ -82,36 +84,43 @@ public class Play extends Command {
 	@Override
 	protected void execute() {
 		if (drit.hasNext()) {
-			pair = drit.next();
+			drpair = drit.next();
 			// try {
 			// Thread.sleep(pair.getFirstValue());
 			// } catch (InterruptedException ex) {
 			// Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null,
 			// ex);
 			// }
-			oi.setDriverX((double) pair.getSecondValue()[1].get(0));
-			oi.setDriverY((double) pair.getSecondValue()[1].get(1));
-			oi.setDriverTwist((double) pair.getSecondValue()[1].get(2));
+			oi.setDriverX((double) drpair.getSecondValue()[1].get(0));
+			oi.setDriverY((double) drpair.getSecondValue()[1].get(1));
+			oi.setDriverTwist((double) drpair.getSecondValue()[1].get(2));
 			for (int i = 1; i <= 10; i++) {
 
-				oi.setDriverButton(i, (boolean) pair.getSecondValue()[0].get(i));
+				oi.setDriverButton(i, (boolean) drpair.getSecondValue()[0].get(i));
 			}
-			oi.setNavigatorX((double) pair.getSecondValue()[1].get(0));
-			oi.setNavigatorY((double) pair.getSecondValue()[1].get(1));
-			oi.setNavigatorTwist((double) pair.getSecondValue()[1].get(2));
-			for (int i = 1; i <= 10; i++) {
-
-				oi.setNavigatorButton(i, (boolean) pair.getSecondValue()[0].get(i));
+			
+			drit.remove(); // avoids a ConcurrentModificationExceptio
+		}
+		if(navit.hasNext()){
+			navpair = navit.next();
+			oi.setNavigatorX((double) navpair.getSecondValue()[1].get(0));
+			oi.setNavigatorY((double) navpair.getSecondValue()[1].get(1));
+			oi.setNavigatorTwist((double) navpair.getSecondValue()[1].get(2));
+			if(navpair.getSecondValue()[0].size() < 13){
+				throw new RuntimeException("barak-noga-yonatan");
 			}
-			drit.remove(); // avoids a ConcurrentModificationException
-			navit.remove(); // avoids a ConcurrentModificationException
+			for (int i = 1; i <= 12; i++) {
+				oi.setNavigatorButton(i,(boolean) navpair.getSecondValue()[0].get(i));
+			}
+			
+			navit.remove();
 		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return !drit.hasNext();
+		return !drit.hasNext() && !navit.hasNext();
 	}
 
 	// Called once after isFinished returns true
