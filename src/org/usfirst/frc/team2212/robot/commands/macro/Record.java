@@ -5,6 +5,7 @@
  */
 package org.usfirst.frc.team2212.robot.commands.macro;
 
+//import static org.usfirst.frc.team2212.robot.Robot.lock;
 import static org.usfirst.frc.team2212.robot.Robot.oi;
 
 import java.io.File;
@@ -29,6 +30,7 @@ public class Record extends Command {
 
 	public Record(String macroName) {
 		this.macroName = macroName;
+		// requires(lock);
 	}
 
 	// Called just before this Command runs the first time
@@ -37,7 +39,7 @@ public class Record extends Command {
 		ArrayList<Boolean> buttonsArray = new ArrayList<>();
 		buttonsArray.add(false);
 		ArrayList<Double> axisArray = new ArrayList<>(3);
-		for (int i = 1; i <= 12; i++) {
+		for (int i = 1; i <= 10; i++) {
 			buttonsArray.add(oi.getDriverButton(i));
 		}
 		axisArray.add(0, oi.getDriverX());

@@ -11,8 +11,8 @@ import org.usfirst.frc.team2212.robot.commands.macro.Record;
 public class OI extends JoystickMap {
 
 	public OI() {
-		PLAY_BUTTON.whenPressed(new Play("test"));
-		RECORD_BUTTON.whileHeld(new Record("test"));
+		PLAY_BUTTON.whenPressed(new Play("test2"));
+		RECORD_BUTTON.whileHeld(new Record("test2"));
 		MOVE_BUTTON.whileHeld(new Move());
 	}
 

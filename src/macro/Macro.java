@@ -27,9 +27,8 @@ public class Macro implements Serializable {
 	 *            X axis, Y axis, Twist
 	 */
 	public Macro(ArrayList buttonArray, ArrayList axisArray) {
-		macro = new ArrayList();
-		macro.add(new Pair<Long, List[]>((long) 0, new List[] { buttonArray,
-				axisArray }));
+		macro = new ArrayList<>();
+		macro.add(new Pair<>(0l, new List[] { buttonArray, axisArray }));
 		lastWriteTime = System.currentTimeMillis();
 	}
 
@@ -40,13 +39,7 @@ public class Macro implements Serializable {
 	}
 
 	public List<Pair<Long, List[]>> getData() {
-		return macro;
-	}
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
+		return (ArrayList) macro.clone();
 	}
 
 }

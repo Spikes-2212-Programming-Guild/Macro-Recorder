@@ -37,6 +37,7 @@ public class Play extends Command {
 
 	public Play(String macroName) {
 		this.macroName = macroName;
+		// requires(lock);
 	}
 
 	// Called just before this Command runs the first time
@@ -70,7 +71,6 @@ public class Play extends Command {
 		} else {
 			SmartDashboard.putBoolean("macro is null", false);
 			it = macro.getData().iterator();
-			pair = it.next();
 			oi.setOverride(true);
 			SmartDashboard.putData(this);
 		}
@@ -80,21 +80,21 @@ public class Play extends Command {
 	@Override
 	protected void execute() {
 		if (it.hasNext()) {
+			pair = it.next();
+			// try {
+			// Thread.sleep(pair.getFirstValue());
+			// } catch (InterruptedException ex) {
+			// Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null,
+			// ex);
+			// }
 			oi.setDriverX((double) pair.getSecondValue()[1].get(0));
 			oi.setDriverY((double) pair.getSecondValue()[1].get(1));
 			oi.setDriverTwist((double) pair.getSecondValue()[1].get(2));
-			for (int i = 1; i <= 12; i++) {
+			for (int i = 1; i < 11; i++) {
+
 				oi.setDriverButton(i, (boolean) pair.getSecondValue()[0].get(i));
 			}
 			it.remove(); // avoids a ConcurrentModificationException
-			pair = it.next();
-			try {
-				Thread.sleep(pair.getFirstValue());
-			} catch (InterruptedException ex) {
-				Logger.getLogger(Play.class.getName()).log(Level.SEVERE, null,
-						ex);
-			}
-
 		}
 	}
 
