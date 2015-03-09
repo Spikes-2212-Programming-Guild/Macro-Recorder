@@ -15,48 +15,43 @@ import java.util.List;
  */
 public class Macro implements Serializable {
 
-	ArrayList<Pair<Long, List[]>> macroDriving;
-	ArrayList<Pair<Long, List[]>> macroNavigating;
-	private long lastWriteTime;
-	
-	
+    ArrayList<List[]> macroDriving;
+    ArrayList<List[]> macroNavigating;
+    private long lastWriteTime;
 
-	/**
-	 *
-	 * @param buttonArray
-	 *            - 12 long array of booleans
-	 * @param axisArray
-	 *            - 3 long array of doubles, ranging from -1 to 1 in this order:
-	 *            X axis, Y axis, Twist
-	 */
-	public Macro(ArrayList buttonArray, ArrayList axisArray, ArrayList buttonArrayNavig, ArrayList axisArrayNavig) {
-		macroDriving = new ArrayList<>();
-		macroDriving.add(new Pair<>(0l, new List[] { buttonArray, axisArray }));
-		lastWriteTime = System.currentTimeMillis();
-		
-		macroNavigating = new ArrayList<>();
-		macroNavigating.add(new Pair<>(0l, new List[] { buttonArrayNavig, axisArrayNavig }));
-		lastWriteTime = System.currentTimeMillis();
-	}
+    /**
+     *
+     * @param buttonArray - 12 long array of booleans
+     * @param axisArray - 3 long array of doubles, ranging from -1 to 1 in this order: X axis, Y axis, Twist
+     * @param buttonArrayNavig - buttonArray for the Navigator
+     * @param axisArrayNavig - axisArray for the Navigator
+     */
+    public Macro(ArrayList buttonArray, ArrayList axisArray, ArrayList buttonArrayNavig, ArrayList axisArrayNavig) {
+        macroDriving = new ArrayList<>();
+        macroDriving.add(new List[]{buttonArray, axisArray});
+        lastWriteTime = System.currentTimeMillis();
 
-	public void addDataDriving(ArrayList buttonArray, ArrayList axisArray) {
-		macroDriving.add(new Pair<Long, List[]>(System.currentTimeMillis()
-				- lastWriteTime, new List[] { buttonArray, axisArray }));
-		lastWriteTime = System.currentTimeMillis();
-	}
-	
-	public void addDataNavigating(ArrayList buttonArrayNav, ArrayList axisArrayNav){
-		macroNavigating.add(new Pair<Long,List[]>(System.currentTimeMillis()
-				- lastWriteTime, new List[] {buttonArrayNav, axisArrayNav}));
-		lastWriteTime = System.currentTimeMillis();
-	}
+        macroNavigating = new ArrayList<>();
+        macroNavigating.add(new List[]{buttonArrayNavig, axisArrayNavig});
+        lastWriteTime = System.currentTimeMillis();
+    }
 
-	public List<Pair<Long, List[]>> getDataDriving() {
-		return (ArrayList) macroDriving.clone();
-	}
-	
-	public List<Pair<Long,List[]>> getDataNavigating() {
-		return (ArrayList) macroNavigating.clone();
-	}
+    public void addDataDriving(ArrayList buttonArray, ArrayList axisArray) {
+        macroDriving.add(new List[]{buttonArray, axisArray});
+        lastWriteTime = System.currentTimeMillis();
+    }
+
+    public void addDataNavigating(ArrayList buttonArrayNav, ArrayList axisArrayNav) {
+        macroNavigating.add(new List[]{buttonArrayNav, axisArrayNav});
+        lastWriteTime = System.currentTimeMillis();
+    }
+
+    public List<List[]> getDataDriving() {
+        return (ArrayList) macroDriving.clone();
+    }
+
+    public List<List[]> getDataNavigating() {
+        return (ArrayList) macroNavigating.clone();
+    }
 
 }
